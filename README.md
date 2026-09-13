@@ -61,6 +61,16 @@ checkpoints/
         └── model.safetensors
 ```
 
+**可选：WebUI 的情感描述模型**
+
+WebUI 的「用情感描述文本控制」需要额外的 Qwen 情感模型（约 1.2 GB），不在上面的权重里：
+
+```bash
+hf download IndexTeam/IndexTTS-2.5 --include "qwen0.6bemo4-merge/*" --local-dir ./checkpoints
+```
+
+不下也能正常使用 WebUI 和命令行推理，只是该功能不可用（启动时会提示）。
+
 ### 3. 安装依赖
 
 **Windows（PowerShell）：**
@@ -68,8 +78,18 @@ checkpoints/
 .\install.ps1
 ```
 
-> `install.ps1` 会依次尝试 `python`、`py -3.11`、`py -3.10`、`py -3` 寻找 Python，
-> 并自动跳过 Microsoft Store 的 `python.exe` 占位符。
+> `install.ps1` 会依次尝试 `python`、`py -3.11`、`py -3.10`、uv 安装的 Python、`py -3`
+> 寻找可用的解释器，并自动跳过 Microsoft Store 的 `python.exe` 占位符。
+> 若只找到 3.10 / 3.11 以外的版本（如 3.14），脚本会直接报错退出 —— 本项目的
+> `pydantic-core`、`kaldifst` 在新版 Python 上没有预编译 wheel，会退回源码编译并失败。
+>
+> 常用参数：
+> | 参数 | 说明 |
+> |------|------|
+> | `-Python <路径>` | 显式指定解释器，跳过自动探测 |
+> | `-RecreateVenv` | `.venv` 由其他 Python 版本创建时，删除并重建 |
+> | `-AllowUnsupportedPython` | 强行用 3.10 / 3.11 以外的版本安装（不推荐） |
+> | `-NoPause` | 结束后不等待回车 |
 >
 > 若提示「无法加载文件……因为在此系统上禁止运行脚本」，说明执行策略不允许运行脚本，改用：
 > ```powershell
@@ -177,6 +197,7 @@ murasame-index-tts/
 │   ├── codec.pth          *编解码器（需下载）
 │   ├── s2mel.pth          *mel 生成（需下载）
 │   ├── hf_cache/          *辅助模型（需下载）
+│   ├── qwen0.6bemo4-merge/ *Qwen 情感模型（WebUI 可选，需下载）
 │   ├── feat1.pt           说话人矩阵（随代码分发）
 │   ├── feat2.pt           情感矩阵（随代码分发）
 │   ├── config.yaml        模型配置
@@ -184,8 +205,10 @@ murasame-index-tts/
 │   ├── reference.ogg      参考音频（角色声纹样本）
 │   └── multilingual_zh_ja_yue_char_del.tiktoken
 ├── indextts/              IndexTTS 推理引擎（来自原项目）
+├── tools/                 WebUI 多语言支持（来自原项目）
 ├── infer.py               命令行推理入口
 ├── webui.py               WebUI 入口
+├── examples/              WebUI 示例（cases.jsonl 随仓库分发，示例音频首次启动时自动下载）
 ├── install.ps1 / .sh      安装脚本
 ├── infer.ps1 / .sh        推理快捷脚本
 └── webui.ps1 / .sh        WebUI 快捷启动

@@ -1,0 +1,9 @@
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 0, "lang": "JA", "text": "ご主人、今日もよろしくお願いします。"}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 0, "lang": "JA", "text": "うむ、任せよ。この程度のこと、造作もない。"}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 0, "lang": "JA", "text": "雨の音を聞いていると、なぜか心が落ち着くのです。"}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 0, "lang": "ZH", "text": "主人，今天的天气真好，要不要一起出去走走？"}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 0, "lang": "ZH", "text": "这把刀既然交到了你手上，我就不会再收回去了。"}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 2, "lang": "JA", "text": "ふふっ、そんなに褒められると、少し照れてしまいます。", "emo_weight": 0.8, "emo_vec_1": 0.8}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 2, "lang": "ZH", "text": "你再说一遍试试？我可没有你那么好的脾气。", "emo_weight": 0.8, "emo_vec_2": 0.8}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 1, "lang": "ZH", "text": "我站在人海中，却感觉比任何时候都要孤独。", "emo_audio": "emo_sad.wav", "emo_weight": 0.8}
+{"prompt_audio": "../checkpoints/reference.ogg", "emo_mode": 3, "lang": "ZH", "text": "这些年的时光终究是错付了……", "emo_text": "极度悲伤"}

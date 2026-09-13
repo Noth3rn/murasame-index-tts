@@ -29,13 +29,15 @@ echo "[2/4] 升级 pip ..."
 pip install --upgrade pip setuptools wheel
 
 # 安装 PyTorch (CUDA 12.8)
+# 必须钉在 2.8：torchaudio 从 2.9 起 save() 强制走 TorchCodec，需要额外依赖
+# 与 FFmpeg 共享库，否则保存 wav 时会抛 RuntimeError。
 echo
 echo "[3/4] 安装 PyTorch 2.8 (CUDA 12.8) ..."
 echo "正在从 PyTorch 官方源下载（约 2-3 GB），请耐心等待..."
-pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 
 # macOS (Apple Silicon) 用户请改为：
-#   pip install torch torchaudio
+#   pip install torch==2.8.0 torchaudio==2.8.0
 
 # 安装其余依赖
 echo

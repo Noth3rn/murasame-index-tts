@@ -14,6 +14,8 @@ jieba==0.42.1
 json5==0.10.0
 librosa==0.10.2.post1
 matplotlib==3.10.0
+# indextts/infer_v2_5.py 顶层 `from modelscope import AutoModelForCausalLM`（QwenEmotion 用）
+modelscope>=1.40.0
 munch==4.0.0
 numba==0.63.0
 numpy==2.2.6

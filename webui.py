@@ -125,7 +125,32 @@ _vram_gb = detect_vram_gb()
 LOW_VRAM = _vram_gb is not None and _vram_gb < LOW_VRAM_THRESHOLD_GB
 
 HALF_PRECISION = cmd_args.fp16 or LOW_VRAM
-LOAD_QWEN_EMO = cmd_args.qwen_emo or not LOW_VRAM
+
+
+def qwen_emo_dir(model_dir):
+    """QwenEmotion 模型目录，路径取自 config.yaml 的 qwen_emo_path。"""
+    try:
+        import yaml
+
+        with open(os.path.join(model_dir, "config.yaml"), encoding="utf-8") as f:
+            rel = (yaml.safe_load(f) or {}).get("qwen_emo_path") or "qwen0.6bemo4-merge/"
+    except Exception:
+        rel = "qwen0.6bemo4-merge/"
+    return os.path.join(model_dir, rel)
+
+
+# 该模型（约 1.2 GB）不在本项目的权重下载清单里，缺失时必须跳过：否则
+# AutoTokenizer 会把一个不存在的本地路径当成 repo id 去校验，抛 HFValidationError，
+# 整个 WebUI 都起不来。跳过只损失「用情感描述文本控制」这一个功能。
+QWEN_EMO_DIR = qwen_emo_dir(cmd_args.model_dir)
+# 只判断目录存在是不够的：下载进行到一半时目录已建好、权重还没落地，
+# 此时放行会让 transformers 抛 OSError（找不到 model.safetensors）。
+# 这里检查的正是 transformers 会去找的那几个权重文件名。
+QWEN_EMO_WEIGHTS = ("model.safetensors", "pytorch_model.bin")
+QWEN_EMO_AVAILABLE = os.path.isdir(QWEN_EMO_DIR) and any(
+    os.path.isfile(os.path.join(QWEN_EMO_DIR, name)) for name in QWEN_EMO_WEIGHTS
+)
+LOAD_QWEN_EMO = (cmd_args.qwen_emo or not LOW_VRAM) and QWEN_EMO_AVAILABLE
 
 if LOW_VRAM:
     print(
@@ -133,8 +158,13 @@ if LOW_VRAM:
         "enabling half precision"
         + ("" if LOAD_QWEN_EMO else " and skipping QwenEmotion")
     )
-    if not LOAD_QWEN_EMO:
+    if not LOAD_QWEN_EMO and QWEN_EMO_AVAILABLE:
         print(">> Emotion control from a text description is unavailable; pass --qwen_emo to force it.")
+
+if not QWEN_EMO_AVAILABLE:
+    print(f">> 未找到 {QWEN_EMO_DIR}，跳过 QwenEmotion。")
+    print("   WebUI 可正常使用，但「用情感描述文本控制」不可用。如需该功能：")
+    print(f'   hf download IndexTeam/IndexTTS-2.5 --include "qwen0.6bemo4-merge/*" --local-dir {cmd_args.model_dir}')
 
 
 def build_tts(use_accel=False, use_torch_compile=False):
