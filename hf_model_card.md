@@ -19,7 +19,7 @@ pipeline_tag: text-to-speech
 
 # 丛雨 TTS — Model Weights
 
-Fine-tuned model weights for [murasame-index-tts](https://github.com/Noth3rnY/murasame-index-tts),
+Fine-tuned model weights for [murasame-index-tts](https://github.com/Noth3rn/murasame-index-tts),
 a TTS voice pack based on **IndexTTS 2.5** (bilibili indextts2).
 
 > **Derivative Work Notice**  
@@ -51,14 +51,14 @@ a TTS voice pack based on **IndexTTS 2.5** (bilibili indextts2).
 
 ```bash
 pip install huggingface_hub
-hf download Noth3rnY/murasame-index-tts-weights --local-dir ./checkpoints
+hf download Noth3rn/murasame-index-tts-weights --local-dir ./checkpoints
 ```
 
 ### 推理
 
 ```bash
 # 克隆代码并安装依赖
-git clone https://github.com/Noth3rnY/murasame-index-tts.git
+git clone https://github.com/Noth3rn/murasame-index-tts.git
 cd murasame-index-tts
 install.bat  # Windows
 # bash install.sh  # Linux
@@ -67,7 +67,7 @@ install.bat  # Windows
 python infer.py "ご主人、今日もよろしく。" -o out.wav
 ```
 
-详细说明见 [GitHub 仓库](https://github.com/Noth3rnY/murasame-index-tts)。
+详细说明见 [GitHub 仓库](https://github.com/Noth3rn/murasame-index-tts)。
 
 ---
 
