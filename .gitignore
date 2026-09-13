@@ -18,6 +18,13 @@ checkpoints/codec.pth
 checkpoints/s2mel.pth
 checkpoints/hf_cache/
 
+# 下载权重时由 Hugging Face 一并落盘的仓库文件（模型卡 + LFS 配置）
+checkpoints/README.md
+checkpoints/.gitattributes
+
+# huggingface_hub 的下载缓存
+checkpoints/.cache/
+
 # 系统文件
 .DS_Store
 Thumbs.db
