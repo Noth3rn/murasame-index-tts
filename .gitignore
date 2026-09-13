@@ -1,0 +1,28 @@
+# 虚拟环境（由 install.bat / install.sh 生成）
+.venv/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# 生成的音频
+output.wav
+*.wav
+*.mp3
+
+# 大体积模型权重（请从 Hugging Face 下载，见 README）
+checkpoints/gpt.pth
+checkpoints/codec.pth
+checkpoints/s2mel.pth
+checkpoints/hf_cache/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
