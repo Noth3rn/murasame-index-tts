@@ -1,5 +1,5 @@
 # 丛雨 TTS — Python 依赖
-# 注意：torch 和 torchaudio 由 install.bat / install.sh 单独从 PyTorch CUDA 源安装
+# 注意：torch 和 torchaudio 由 install.ps1 / install.sh 单独从 PyTorch CUDA 源安装
 # Python 版本要求：>=3.10, <3.12
 
 accelerate==1.8.1

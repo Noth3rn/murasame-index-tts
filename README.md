@@ -13,7 +13,7 @@
 
 | 项目 | 要求 |
 |------|------|
-| 操作系统 | Windows 10/11 或 Linux |
+| 操作系统 | Windows 10/11（PowerShell 5.1+）或 Linux |
 | GPU | NVIDIA（显存 ≥ 8 GB，推荐 16 GB） |
 | CUDA | 12.x |
 | Python | 3.10 或 3.11（不支持 3.12+） |
@@ -63,12 +63,20 @@ checkpoints/
 
 ### 3. 安装依赖
 
-**Windows：**
-```bat
-install.bat
+**Windows（PowerShell）：**
+```powershell
+.\install.ps1
 ```
 
-**Linux：**
+> `install.ps1` 会依次尝试 `python`、`py -3.11`、`py -3.10`、`py -3` 寻找 Python，
+> 并自动跳过 Microsoft Store 的 `python.exe` 占位符。
+>
+> 若提示「无法加载文件……因为在此系统上禁止运行脚本」，说明执行策略不允许运行脚本，改用：
+> ```powershell
+> powershell -ExecutionPolicy Bypass -File .\install.ps1
+> ```
+
+**Linux / macOS：**
 ```bash
 bash install.sh
 ```
@@ -81,15 +89,17 @@ bash install.sh
 
 ### 命令行推理
 
-**Windows：**
-```bat
-infer.bat "ご主人、今日もよろしく。" -o out.wav
+**Windows（PowerShell）：**
+```powershell
+.\infer.ps1 "ご主人、今日もよろしく。" -o out.wav
 ```
 
-**Linux：**
+**Linux / macOS：**
 ```bash
 bash infer.sh "ご主人、今日もよろしく。" -o out.wav
 ```
+
+> 输出文件路径相对于当前工作目录，建议在项目根目录下运行。
 
 **直接调用 Python（已激活 .venv）：**
 ```bash
@@ -122,12 +132,12 @@ python infer.py "..." --ref my_voice.wav -o out.wav
 
 ### WebUI（图形界面）
 
-**Windows：**
-```bat
-webui.bat
+**Windows（PowerShell）：**
+```powershell
+.\webui.ps1
 ```
 
-**Linux：**
+**Linux / macOS：**
 ```bash
 bash webui.sh
 ```
@@ -176,9 +186,9 @@ murasame-index-tts/
 ├── indextts/              IndexTTS 推理引擎（来自原项目）
 ├── infer.py               命令行推理入口
 ├── webui.py               WebUI 入口
-├── install.bat / .sh      安装脚本
-├── infer.bat / .sh        推理快捷脚本
-└── webui.bat / .sh        WebUI 快捷启动
+├── install.ps1 / .sh      安装脚本
+├── infer.ps1 / .sh        推理快捷脚本
+└── webui.ps1 / .sh        WebUI 快捷启动
 ```
 
 ---
@@ -194,8 +204,16 @@ A：可从 https://pytorch.org/get-started/locally/ 手动下载对应 wheel 文
 **Q：语音质量不理想**  
 A：尝试更清晰的参考音频（`--ref`），或调整 `--seed` 多生成几次。
 
-**Q：Windows 乱码**  
-A：确保终端使用 UTF-8（`chcp 65001`），或使用 PowerShell / Windows Terminal。
+**Q：提示「无法加载文件 …… 在此系统上禁止运行脚本」**  
+A：这是 PowerShell 的执行策略限制。用 `powershell -ExecutionPolicy Bypass -File .\install.ps1` 运行，
+或一次性放行当前用户：
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+**Q：Windows 下日文 / 中文显示乱码**  
+A：脚本会自动把控制台切到 UTF-8，建议使用 Windows Terminal 或 PowerShell 7。旧版控制台可在标题栏
+右键「属性」中换成支持中日文的字体（如 MS Gothic、更纱黑体）。
 
 ---
 

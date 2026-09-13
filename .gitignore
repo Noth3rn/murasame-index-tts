@@ -1,4 +1,4 @@
-# 虚拟环境（由 install.bat / install.sh 生成）
+# 虚拟环境（由 install.ps1 / install.sh 生成）
 .venv/
 
 # Python 缓存

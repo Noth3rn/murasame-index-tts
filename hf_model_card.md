@@ -60,8 +60,8 @@ hf download Noth3rnY/murasame-index-tts-weights --local-dir ./checkpoints
 # 克隆代码并安装依赖
 git clone https://github.com/Noth3rn/murasame-index-tts.git
 cd murasame-index-tts
-install.bat  # Windows
-# bash install.sh  # Linux
+.\install.ps1     # Windows (PowerShell)
+# bash install.sh # Linux / macOS
 
 # 命令行推理
 python infer.py "ご主人、今日もよろしく。" -o out.wav
