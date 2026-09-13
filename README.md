@@ -28,7 +28,7 @@
 ### 1. 克隆代码
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/murasame-index-tts.git
+git clone https://github.com/Noth3rnY/murasame-index-tts.git
 cd murasame-index-tts
 ```
 
@@ -36,16 +36,16 @@ cd murasame-index-tts
 
 模型权重托管在 Hugging Face，需单独下载后放入 `checkpoints/` 目录。
 
-**方式一：huggingface-cli（推荐）**
+**方式一：hf 命令行（推荐）**
 
 ```bash
 pip install huggingface_hub
-huggingface-cli download YOUR_HF_USERNAME/murasame-index-tts-weights --local-dir ./checkpoints
+hf download Noth3rnY/murasame-index-tts-weights --local-dir ./checkpoints
 ```
 
 **方式二：手动下载**
 
-前往 [https://huggingface.co/YOUR_HF_USERNAME/murasame-index-tts-weights](https://huggingface.co/YOUR_HF_USERNAME/murasame-index-tts-weights)，下载以下文件放入 `checkpoints/` 目录：
+前往 [https://huggingface.co/Noth3rnY/murasame-index-tts-weights](https://huggingface.co/Noth3rnY/murasame-index-tts-weights)，下载以下文件放入 `checkpoints/` 目录：
 
 ```
 checkpoints/
