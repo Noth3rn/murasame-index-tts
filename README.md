@@ -40,12 +40,12 @@ cd murasame-index-tts
 
 ```bash
 pip install huggingface_hub
-hf download Noth3rn/murasame-index-tts-weights --local-dir ./checkpoints
+hf download Noth3rnY/murasame-index-tts-weights --local-dir ./checkpoints
 ```
 
 **方式二：手动下载**
 
-前往 [https://huggingface.co/Noth3rn/murasame-index-tts-weights](https://huggingface.co/Noth3rn/murasame-index-tts-weights)，下载以下文件放入 `checkpoints/` 目录：
+前往 [https://huggingface.co/Noth3rnY/murasame-index-tts-weights](https://huggingface.co/Noth3rnY/murasame-index-tts-weights)，下载以下文件放入 `checkpoints/` 目录：
 
 ```
 checkpoints/

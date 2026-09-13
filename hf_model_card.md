@@ -51,7 +51,7 @@ a TTS voice pack based on **IndexTTS 2.5** (bilibili indextts2).
 
 ```bash
 pip install huggingface_hub
-hf download Noth3rn/murasame-index-tts-weights --local-dir ./checkpoints
+hf download Noth3rnY/murasame-index-tts-weights --local-dir ./checkpoints
 ```
 
 ### 推理
